@@ -1,3 +1,4 @@
+#include "Excitation.hh"
 
 Excitation::Excitation(double energy_deposit, double stopping_power) 
 {

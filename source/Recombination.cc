@@ -1,3 +1,4 @@
+#include "Recombination.hh"
 
 Recombination::Recombination(int ionisations, int excitations, double stopping_power)
 {
