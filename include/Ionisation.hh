@@ -13,8 +13,7 @@ class Ionisation {
 public:
     Ionisation() : ionisation_() {};
 
-    void add_cluster(int cluster_size, const std::vector<double>& position)
-    {
+    void add_cluster(int cluster_size, const std::vector<double>& position) {
         ElectronCluster current_cluster_;
 
         current_cluster_.position_ = position;

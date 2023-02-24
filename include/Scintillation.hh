@@ -15,8 +15,7 @@ class Scintillation {
 public:
     Scintillation() : scintillation_() {};
 
-    void add_cluster(int cluster_size, const std::vector<doubble>& position)
-    {
+    void add_cluster(int cluster_size, const std::vector<doubble>& position) {
         Relaxation relaxation_generator();
         PhotonCluster current_cluster_;
 
@@ -32,16 +31,7 @@ public:
     
     const std::vector<PhotonCluster> get_scintillation() const { return scintillation_; }
 
-    void print_scintillation() const {
-        std::cout << "Scintillation clusters:" << std::endl;
-        for (const auto& cluster : scintillation_) {
-            std::cout << "  Position: (";
-            for (const auto& p : cluster.position_) {
-                std::cout << p << ", ";
-            }
-            std::cout << "), photons: " << cluster.photons_.size() << std::endl;
-        }
-    }
+    const std::PhotonCluster get_current_cluster() const { return current_cluster_; }
 
     std::vector<double> get_emission_times() const {
         std::vector<double> emission_times;
@@ -63,6 +53,16 @@ public:
         return cluster_positions;
     }
 
+    void print_scintillation() const {
+        std::cout << "Scintillation clusters:" << std::endl;
+        for (const auto& cluster : scintillation_) {
+            std::cout << "  Position: (";
+            for (const auto& p : cluster.position_) {
+                std::cout << p << ", ";
+            }
+            std::cout << "), photons: " << cluster.photons_.size() << std::endl;
+        }
+    }
 
 private:
     std::vector<PhotonCluster> scintillation_;

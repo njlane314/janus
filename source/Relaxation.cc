@@ -1,4 +1,5 @@
 #include "Relaxation.hh"
+
 #include "OpticalPhoton.hh"
 
 Relaxation::Relaxation(double t_global, double singlet_to_triplet, double singlet_lifetime, double triplet_lifetime)
