@@ -1,12 +1,5 @@
 #include "TrackStructure.hh"
 
-#include "Excitation.hh"
-#include "Recombination.hh"
-#include "Relaxation.hh"
-
-#include "Ionisation.hh"
-#include "Scintillation.hh"
-
 TrackStructure::TrackStructure() 
 {}
 

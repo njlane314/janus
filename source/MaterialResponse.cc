@@ -1,7 +1,7 @@
 #include "MaterialResponse.hh"
 
 #include "Excitation.hh"
-#include "Recombination.hh"
+#include "TrackStructure.hh"
 
 #include "Scintillation.hh"
 #include "Ionisation.hh"
@@ -15,15 +15,15 @@ MaterialResponse::MaterialResponse()
 MaterialResponse::~MaterialResponse()
 {}
 
-Ionisation, Scintillation MaterialResponse::create_response(TrackStructure* aTrack)
-{
-    
-}
+void MaterialResponse::create_response(TrackStructure* track_structure)
+{}
 
 void MaterialResponse::process_energy_deposit(double visible_deposit, double visible_linear_transfer, std::vector<double> position)
 {
-    Excitation excitation_cluster(visible_deposit, visible_linear_transfer);
+    ElectronCloud electron_cloud_; PhotonRadiant photon_radiant_;
 
-    scintillation_.add_cluster(excitation_cluster.get_optical_photons(), position);
-    ionisation_.add_cluster(excitation_cluster.get_thermal_electrons(), position);
+    std::tie(electron_cloud_, photon_radiant_) = Excitation::create_excitation(visible_deposit, visible_linear_transfer, position);
+
+    ionisation_.add_cloud(electron_cloud_);
+    scintillation_.add_radiant(photon_radiant_);
 }

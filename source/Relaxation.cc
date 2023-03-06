@@ -14,12 +14,12 @@ Relaxation::~Relaxation()
 
 OpticalPhoton Relaxation::create_photon()
 {
-	OpticalPhoton aPhoton;
+	OpticalPhoton a_photon;
 
-	aPhoton.set_time(sample_emission());
-	//aPhoton.set_wavelength(sample_wavelength());
+	a_photon.set_time(t_global_ + sample_emission());
+	//a_photon.set_wavelength(sample_wavelength());
 
-	return aPhoton;
+	return a_photon;
 }
 
 void Relaxation::sample_emission()

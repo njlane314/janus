@@ -5,7 +5,7 @@
 
 #include "OpticalPhoton.hh"
 
-struct PhotonCluster {
+struct PhotonRadiant {
     std::vector<OpticalPhoton> photons_;
     std::vector<double> position_;
 };
@@ -15,56 +15,56 @@ class Scintillation {
 public:
     Scintillation() : scintillation_() {};
 
-    void add_cluster(int cluster_size, const std::vector<doubble>& position) {
+    void add_radiant(int radiant_size, const std::vector<doubble>& position) {
         Relaxation relaxation_generator();
-        PhotonCluster current_cluster_;
+        PhotonRadiant current_radiant_;
 
-        current_cluster_.position_ = position;
-        for (int i = 0; i < cluster_size; i++) {
+        current_radiant_.position_ = position;
+        for (int i = 0; i < radiant_size; i++) {
             add_photon(relaxation_generator.create_photon());
         }
 
-        scintillation_.push_back(current_cluster_);
+        scintillation_.push_back(current_radiant_);
     }
 
-    void add_photon(OpticalPhoton aPhoton) { current_cluster_.photons_.push_back(aPhoton); };
+    void add_photon(OpticalPhoton aPhoton) { current_radiant_.photons_.push_back(aPhoton); };
     
-    const std::vector<PhotonCluster> get_scintillation() const { return scintillation_; }
+    const std::vector<PhotonRadiant> get_scintillation() const { return scintillation_; }
 
-    const std::PhotonCluster get_current_cluster() const { return current_cluster_; }
+    const std::PhotonRadiant get_current_radiant() const { return current_radiant_; }
 
     std::vector<double> get_emission_times() const {
         std::vector<double> emission_times;
-        for (const auto& cluster : scintillation_) {
-            for (const auto& photon : cluster.photons_) {
+        for (const auto& radiant : scintillation_) {
+            for (const auto& photon : radiant.photons_) {
                 emission_times.push_back(photon.get_time());
             }
         }
         return emission_times;
     }
 
-    std::vector<double> get_cluster_positions() const {
-        std::vector<double> cluster_positions;
-        for (const auto& cluster : scintillation_) {
-            for (const auto& pos : cluster.position_) {
-                cluster_positions.push_back(pos);
+    std::vector<double> get_radiant_positions() const {
+        std::vector<double> radiant_positions;
+        for (const auto& radiant : scintillation_) {
+            for (const auto& pos : radiant.position_) {
+                radiant_positions.push_back(pos);
             }
         }
-        return cluster_positions;
+        return radiant_positions;
     }
 
     void print_scintillation() const {
-        std::cout << "Scintillation clusters:" << std::endl;
-        for (const auto& cluster : scintillation_) {
+        std::cout << "Scintillation radiants:" << std::endl;
+        for (const auto& radiant : scintillation_) {
             std::cout << "  Position: (";
-            for (const auto& p : cluster.position_) {
+            for (const auto& p : radiant.position_) {
                 std::cout << p << ", ";
             }
-            std::cout << "), photons: " << cluster.photons_.size() << std::endl;
+            std::cout << "), photons: " << radiant.photons_.size() << std::endl;
         }
     }
 
 private:
-    std::vector<PhotonCluster> scintillation_;
-    PhotonCluster current_cluster_;
+    std::vector<PhotonRadiant> scintillation_;
+    PhotonRadiant current_radiant_;
 }
